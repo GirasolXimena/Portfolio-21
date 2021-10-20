@@ -6,7 +6,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <img alt="Vue logo" class="h-4" src="./assets/logo.png" />
-  <HelloWorld msg="Please touch my bootyhole" />
+  <HelloWorld msg="Please touch my demons in by butt" />
 </template>
 
 <style>
