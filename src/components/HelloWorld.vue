@@ -3,60 +3,36 @@ defineProps<{title: string, subtitle: string}>()
 </script>
 
 <template>
-	<!-- reference image 
-	https://www.creativefabrica.com/wp-content/uploads/2020/03/20/80s-Retro-3d-Text-Effect-Features-Graphics-3690058-1-1-580x386.jpg-->
-	<div id="image">
+	<div class="container">
 		<div id="top">
-			<div id="sky"></div>
+			<div id="sky" :class="animation.sky"></div>
 		</div>
 		<div id="bottom">
-			<div id="ground"></div>
+			<div id="ground" :class="animation.move"></div>
 		</div>
-		<div id="text">
-			<h1 class="title">{{title}}</h1>
-			<h2 class="subtitle">{{subtitle}}</h2>
+		<div id="text" :class="animation.zoom">
+			<h1 class="title" :class="animation.shine">{{title}}</h1>
+			<h2 class="subtitle" :class="animation.hover">{{subtitle}}</h2>
 		</div>
 	</div>
 </template>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&family=Yellowtail&display=swap");
-:root {
-	--navy: #0c0c4a;
-	--dark-navy: #060726;
-	--pink: rgba(213, 84, 213, 1);
-	--pink2: rgba(213, 84, 213, 0.7);
-}
 
-body {
-	width: 100vw;
-
-	height: 100vh;
-
-	background: black;
+.container {
 	display: grid;
-	place-items: center;
-	filter: saturate(130%) contrast(125%);
-}
-#app {
-	width: 100%;
 	height: 100%;
-	display: grid;
-	place-items: stretch;
-	grid-template-columns: repeat(2, 1fr);
-}
-#image {
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
+	width: 200%;
 	background: var(--navy);
-	display: grid;
+	overflow: hidden;
 
 	position: relative;
+	left: 50%;
 	border: 8px solid;
 	border-color: darkmagenta magenta;
 	outline: 8px ridge cyan;
-	outline-offset: 4px;
+	/* outline-offset: 4px; */
 }
 #top {
 	height: 67%;
@@ -84,7 +60,6 @@ body {
 			10px 0;
 	filter: drop-shadow(0 0 1px magenta) drop-shadow(0 0 3px magenta)
 		drop-shadow(0 0 7px cyan);
-	animation: move 10s linear infinite;
 	opacity: 0.2;
 }
 #bottom {
@@ -122,7 +97,6 @@ body {
 		);
 	filter: drop-shadow(0 0 1px cyan) drop-shadow(0 0 3px cyan)
 		drop-shadow(0 0 7px cyan);
-	animation: move 30s linear infinite;
 }
 
 #text {
@@ -140,29 +114,59 @@ body {
 	color: transparent;
 	font-family: "Russo One", sans-serif;
 	text-transform: uppercase;
-	font-size: 10em;
-	transform: translatey(25px);
+	font-size: 8vw;
+	transform: translatey(25%);
 	background: linear-gradient(
 		cornflowerblue 30%,
 		white,
 		darkmagenta 60%,
 		cornflowerblue 100%
 	);
+	background-clip: text;
 	background-size: contain;
-	-webkit-background-clip: text;
 	-webkit-text-stroke: 1px silver;
 	filter: drop-shadow(5px 5px 1px black) drop-shadow(1px 1px 1px magenta);
-	animation: bg-shift 0.5s ease-in-out infinite alternate;
 }
 .subtitle {
 	color: white;
 	font-family: "Yellowtail", cursive;
 	font-weight: 100;
-	font-size: 4em;
-	transform: translatey(-10px) rotatez(-5deg);
+	font-size: 5vw;
+	transform: translatey(-10%) rotatez(-5deg);
 	text-shadow: 0 0 3px magenta, 0 0 7px magenta, 0 0 15px black, 0 0 15px black;
-	animation: hover 1s ease-in-out infinite;
 }
+
+</style>
+<style module="animation">
+.hover {
+	animation: hover 1s ease-in-out 1;
+}
+.shine {
+	animation: bg-shift 0.5s ease-in-out 1 alternate;
+}
+.move {
+		animation: move 30s linear 1;
+}
+
+.sky {
+		animation: move 10s linear 1;
+}
+
+.zoom {
+	animation: zoom 30s linear 1 ;
+}
+
+
+@keyframes zoom {
+	from {
+		transform: scale(25%);
+	}
+	to {
+		transform: scale(100%);
+	}
+
+}
+
 @keyframes move {
 	to {
 		background-position-y: 2000px;
@@ -188,9 +192,5 @@ body {
 	100% {
 		transform: translatey(-10px) rotatez(-5deg) perspective(200px) translatez(0);
 	}
-}
-
-img {
-	width: 100%;
 }
 </style>
