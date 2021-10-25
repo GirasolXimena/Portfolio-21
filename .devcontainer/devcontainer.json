@@ -21,7 +21,9 @@
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"johnsoncodehk.volar",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"stylelint.vscode-stylelint",
+		"jock.svg"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
