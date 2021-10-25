@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import City from "../assets/City.svg?component";
+
 defineProps<{ title: string; subtitle: string }>();
 </script>
 
 <template>
   <div class="container">
     <div id="top">
-      <!-- <div id="sky" :class="animation.sky"></div> -->
+      <div id="sky" :class="animation.sky" />
+      <City class="city" :class="animation.dash" />
     </div>
     <div id="bottom">
-      <!-- <div id="ground" :class="animation.move"></div> -->
+      <div id="ground" :class="animation.move" />
     </div>
     <!-- <div id="text" :class="animation.zoom"> -->
     <!-- <h1 class="title" :class="animation.shine">{{title}}</h1> -->
@@ -20,47 +23,63 @@ defineProps<{ title: string; subtitle: string }>();
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&family=Yellowtail&display=swap");
 
+::v-deep(.outline) {
+  stroke-dasharray: 2830;
+  fill-opacity: 0.25;
+  fill-rule: nonzero;
+  stroke-width: 2.5px;
+  stroke: white;
+  fill: black;
+}
 .container {
   display: grid;
   height: 100%;
   width: 200%;
-  /* background: var(--navy); */
-  /* overflow: hidden; */
+  background: var(--navy);
+  overflow: hidden;
 
   position: relative;
   left: 50%;
-  /* border: 8px solid; */
-  /* border-color: darkmagenta magenta; */
-  /* outline: 8px ridge cyan; */
-  /* outline-offset: 4px; */
+  border: 8px solid;
+  border-color: darkmagenta magenta;
+  outline: 8px ridge cyan;
+  outline-offset: 4px;
+}
+
+.city {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transform: scale(0.5) translateX(-100%);
 }
 #top {
-  /* height: 67%; */
-  /* background: linear-gradient(transparent 50%, hotpink 160%); */
-  /* box-shadow: 0 15px 50px 1px white; */
-  /* position: relative; */
+  height: 67%;
+  background: linear-gradient(transparent 50%, hotpink 160%);
+  box-shadow: 0 15px 50px 1px white;
+  position: relative;
 }
 #sky {
-  /* position: absolute; */
-  /* top: 0; */
-  /* width: 100%; */
-  /* height: 100%; */
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 
-  /* background: repeating-linear-gradient( */
-  /* pink 2px, */
-  /* transparent 3px, */
-  /* transparent 30px */
-  /* ), */
-  /* repeating-linear-gradient( */
-  /* 90deg, */
-  /* pink 2px, */
-  /* transparent 3px, */
-  /* transparent 40px */
-  /* ) */
-  /* 10px 0; */
-  /* filter: drop-shadow(0 0 1px magenta) drop-shadow(0 0 3px magenta) */
-  /* drop-shadow(0 0 7px cyan); */
-  /* opacity: 0.2; */
+  background: repeating-linear-gradient(
+      pink 2px,
+      transparent 3px,
+      transparent 30px
+    ),
+    repeating-linear-gradient(
+        90deg,
+        pink 2px,
+        transparent 3px,
+        transparent 40px
+      )
+      10px 0;
+  filter: drop-shadow(0 0 1px magenta) drop-shadow(0 0 3px magenta)
+    drop-shadow(0 0 7px cyan);
+  opacity: 0.2;
 }
 #bottom {
   position: absolute;
@@ -138,7 +157,10 @@ defineProps<{ title: string; subtitle: string }>();
 </style>
 <style module="animation">
 .hover {
-  animation: hover 1s ease-in-out 1;
+  animation: hover 1s ease-in 1;
+}
+.dash {
+  animation: dash 5s ease-in-out forwards;
 }
 .shine {
   animation: bg-shift 0.5s ease-in-out 1 alternate;
@@ -188,6 +210,20 @@ defineProps<{ title: string; subtitle: string }>();
   }
   100% {
     transform: translatey(-10px) rotatez(-5deg) perspective(200px) translatez(0);
+  }
+}
+@keyframes dash {
+  from {
+    stroke-dashoffset: 2830;
+  }
+  85% {
+    stroke-dashoffset: 850;
+  }
+  /* 98% {
+    stroke-dashoffset: 50;
+  } */
+  to {
+    stroke-dashoffset: 0;
   }
 }
 </style>
