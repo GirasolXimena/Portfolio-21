@@ -5,7 +5,15 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <HelloWorld title="Robert Andrade"  subtitle="Front End Developer" />
+<div>
+  <router-link to="/">
+    Home
+  </router-link>
+  <router-link to="/crypto">
+    About
+  </router-link>
+  <router-view />
+</div>
 </template>
 <style>
 :root {
@@ -25,7 +33,7 @@ import HelloWorld from './components/HelloWorld.vue'
 body {
   width: 100vw;
   height: 100vh;
-  background: black;
+  /* background: black; */
   display: grid;
   place-items: center;
   filter: saturate(130%) contrast(125%);
