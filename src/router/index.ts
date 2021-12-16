@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import ResumeInfo from '../components/ResumeInfo.vue'
-
-const About = { template: '<div>About</div>' }
+import CryptoLogo from '../components/CryptoLogo.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,7 +11,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/crypto',
     name: 'crypto',
-    component: About
+    component: CryptoLogo
+    // props: {
+    //   height: 150,
+    //   width: 150
+    // }
   }
 ]
 
